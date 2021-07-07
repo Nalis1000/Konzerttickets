@@ -8,7 +8,7 @@ CREATE TABLE reduction (
     paytime INT(2)
 );
 
-CREATE TABLE user (
+CREATE TABLE users (
     userid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     lastname VARCHAR(50),
     firstname VARCHAR(50),
@@ -28,7 +28,7 @@ CREATE TABLE orders (
     fk_userid INT NOT NULL,
     fk_concertid INT NOT NULL,
     ispayed BOOLEAN,
-    FOREIGN KEY (fk_userid) REFERENCES user(userid),
+    FOREIGN KEY (fk_userid) REFERENCES users(userid),
     FOREIGN KEY (fk_concertid) REFERENCES concerts(concertid)
 );
 
