@@ -5,7 +5,6 @@
     <title>New Buy Order</title>
     <!-- Set base for relative urls to the directory of index.php: -->
     <base href="<?= ROOT_URL ?>/">
-    <!--<link rel="stylesheet" href="public/css/app.css">-->
 </head>
 <body>
     <form>
@@ -20,11 +19,12 @@
         </fieldset>
         <label for="concert_data">Concert Data: </label>
         <fieldset id="concert_data">
-            <label for="concert">Concert: </label>
-            <select id="concert" name="concert">
-            <?php foreach($concerts as $concert){?>
-                <option value=<?php $concert['artist']?>
-            <?php }?>
+            <label for="concert">Concert: </label><br>
+            <select class=selectconcert id="concert" name="concert" style="width:100%">
+                <option value="">Select a state....</option>
+            <?php foreach($concerts as $concert){
+                echo '<option value="'. $concert['artist'].'">'.$concert['artist'].'</option>';
+            }?>
 
             </select>
         </fieldset>

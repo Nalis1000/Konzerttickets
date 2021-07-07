@@ -3,7 +3,7 @@ require 'core/bootstrap.php';
 require 'routes.php';
 
 $db = [
-	'name'     => 'meinedatenbank',
+	'name'     => 'Konzertticket',
 	'username' => 'root',
 	'password' => '',
 ];
