@@ -1,9 +1,6 @@
 <?php
 require 'core/bootstrap.php';
-
-$routes = [
-	'/hallo/welt' => 'WelcomeController@index',
-];
+require 'routes.php';
 
 $db = [
 	'name'     => 'meinedatenbank',
