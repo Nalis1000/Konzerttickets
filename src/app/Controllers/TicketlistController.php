@@ -1,7 +1,7 @@
 <?php
 
 
-class ticketlistcontroller
+class ticketlistController
 {
 function index(){
 
