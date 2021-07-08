@@ -3,11 +3,18 @@
 
 class buyTicketController
 {
-function index(){
-    require 'app/Models/DatabaseRequests.php';
+    var $concertModel = '';
 
-    //$concerts=DatabaseRequests->getConcerts();
+    function index(){
+        require 'app/Models/ConcertModel.php';
 
-    require "app/views/buyTicket.view.php";
-}
+        //Erstellen neues ConcertModel objekt if noch keines vorhanden
+        if($this->concertModel === ''){
+            $this->concertModel = new ConcertModel();
+        }
+
+        $concerts=$this->concertModel->getConcerts();
+
+        require "app/views/buyTicket.view.php";
+    }
 }
