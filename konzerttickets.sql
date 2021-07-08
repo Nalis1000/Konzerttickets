@@ -27,6 +27,7 @@ CREATE TABLE orders (
     orderid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fk_userid INT NOT NULL,
     fk_concertid INT NOT NULL,
+    paydate DATE,
     ispayed BOOLEAN,
     FOREIGN KEY (fk_userid) REFERENCES users(userid),
     FOREIGN KEY (fk_concertid) REFERENCES concerts(concertid)
@@ -125,3 +126,6 @@ INSERT INTO concerts (concertid, artist) VALUES
 (84, 'Bob Marley'),
 (85, 'Depeche Mode'),
 (86, 'Aretha Franklin');
+
+ALTER TABLE concerts
+    MODIFY concertid int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
