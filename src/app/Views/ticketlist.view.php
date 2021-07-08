@@ -40,15 +40,18 @@
 
                                 </td>
                                 <td>
-                                    <input type="text" id="lastname" name="lastname"><br>
-                                    <input type="text" id="firstname" name="firstname"><br>
-                                    <input type="email" id="email" name="email"><br>
-                                    <input type="text" id="tel" name="tel">
+                                    <input type="text" id="lastname" name="lastname" value="<?php $ticket['lastname']?>"><br>
+                                    <input type="text" id="firstname" name="firstname" value="<?php $ticket['firstname']?>"><br>
+                                    <input type="email" id="email" name="email" value="<?php $ticket['email']?>"><br>
+                                    <input type="text" id="tel" name="tel" value="<?php $ticket['firstname']?>">
                                     <label for="reduction">Reduction: </label><br>
                                     <select class=selectreduction id="reduction" name="reduction" style="width:100%">
                                         <option value="">Select a Reduction....</option>
                                         <?php foreach ($reductions as $reduction) {
-                                            echo '<option value="' . $reduction['reductionid'] . '">' . $reduction['reduction'] . '%</option>';
+                                            echo '<option value="' . $reduction['reductionid'] . '"';
+                                            if($ticket['reductionId']===$reduction['reductionid'])
+                                                echo 'selected';
+                                            echo'>' . $reduction['reduction'] '</option>';
                                         } ?>
                                     </select><br><br>
 
