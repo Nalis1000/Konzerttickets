@@ -59,7 +59,8 @@ class TicketlistModel
         $reductionQuery->bindParam(':reductionid', $reductionid);
         $reductionQuery->execute();
         $returnid = $reductionQuery->fetch();
-        $addtime = '+'.$returnid['paytime'].' days';
+
+        $addtime = ' +'.$returnid['paytime'].'days';
         $paydate = Date("Y-d-m", strtotime($addtime));
         return $paydate;
     }
