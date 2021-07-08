@@ -16,10 +16,10 @@
         </thead>
         <tbody>
         <?php /** @var TYPE_NAME $tickets */
-        foreach($tickets as $ticket){ ?>
+        foreach($tickets as $ticket){  var_dump($ticket);?>
         <tr>
             <td>
-                <input type="checkbox" id="paid" name="paid"value="<?php $ticket['orderid']?>">
+                <input type="checkbox" id="paid" name="paid"value="<?= $ticket['orderid']?>">
             </td>
             <td>
                 <button type="button" class="collapsible">Name:  <?= $ticket['lastname']." ".$ticket['firstname']."   "."Concert: ".$ticket['artist']?></button>
@@ -49,7 +49,7 @@
                                         <option value="">Select a Reduction....</option>
                                         <?php foreach ($reductions as $reduction) {
                                             echo '<option value="' . $reduction['reductionid'] . '"';
-                                            if($ticket['reductionId']===$reduction['reductionid'])
+                                            if($ticket['reductionid']===$reduction['reductionid'])
                                                 echo 'selected';
                                             echo'>' . $reduction['reductionId'] .'</option>';
                                         } ?>
@@ -71,7 +71,6 @@
                                             } ?>
                                         </select>
                                     </fieldset>
-
                                         <input type="submit" name="submit" value="Buy Ticket">
                                 </td>
                                 <td>

@@ -4,7 +4,7 @@ class WelcomeController
 {
 	public function index()
 	{
-		$hello=''
+		$hello='';
 		
 		require 'app/Views/welcome.view.php';
 	}
