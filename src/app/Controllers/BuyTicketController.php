@@ -10,7 +10,7 @@ class buyTicketController
         require 'app/Models/ConcertModel.php';
         require 'app/Models/ReductionModel.php';
 
-        //Erstellen neues ConcertModel objekt if noch keines vorhanden
+        //Erstellen neue ConcertModel und ReductionModel objekte falls noch keine vorhanden
         if($this->concertModel === ''){
             $this->concertModel = new ConcertModel();
         }
