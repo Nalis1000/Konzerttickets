@@ -18,6 +18,13 @@
             <input type="email" id="email" name="email"><br>
             <label for="tel">phone number: </label>
             <input type="text" id="tel" name="tel"><br>
+            <label for="reduction">Reduction: </label><br>
+            <select class=selectreduciton id="reduction" name="reduction" style="width:100%">
+                <option value="">Select a Reduction....</option>
+                <?php foreach ($reductions as $reduction) {
+                    echo '<option value="' . $reduction['reductionid'] . '">' . $reduction['reduction'] . '%</option>';
+                } ?>
+            </select>
         </fieldset>
         <label for="concert_data">Concert Data: </label>
         <fieldset id="concert_data">
@@ -26,16 +33,6 @@
                 <option value="">Select an Artist....</option>
                 <?php foreach ($concerts as $concert) {
                     echo '<option value="' . $concert['concertid'] . '">' . $concert['artist'] . '</option>';
-                } ?>
-            </select>
-        </fieldset>
-        <label for="reduction_data">Concert Data: </label>
-        <fieldset id="reduction_data">
-            <label for="reduction">Concert: </label><br>
-            <select class=selectreduciton id="reduction" name="reduction" style="width:100%">
-                <option value="">Select a Reduction....</option>
-                <?php foreach ($reductions as $reduction) {
-                    echo '<option value="' . $reduction['reductionid'] . '">' . $reduction['reduction'] . '%</option>';
                 } ?>
             </select>
         </fieldset>
