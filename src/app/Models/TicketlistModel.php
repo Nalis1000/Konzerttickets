@@ -7,7 +7,7 @@ class TicketlistModel
         $pdo=db();
         $pre=$pdo->prepare('
             SELECT u.userid, u.firstname, u.lastname, u.email, u.phone, r.reduction,
-            r.paytime, o.ispayed, c.artist FROM orders AS o JOIN concerts AS c ON o.fk_concertid = c.concertid 
+            r.paytime, o.ispayed, o.orderid, c.artist FROM orders AS o JOIN concerts AS c ON o.fk_concertid = c.concertid 
             JOIN users AS u ON o.fk_userid = u.userid
             JOIN reduction AS r ON r.reductionid = u.fk_reductionid; '
         );
