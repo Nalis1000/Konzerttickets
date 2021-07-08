@@ -7,7 +7,7 @@
     <base href="<?= ROOT_URL ?>/">
 
     <link rel="stylesheet" href="public/css/collapsiblestylesheet.css">
-    <script src="public/js/collapsible.js"></script>
+     <script src="public/js/collapsible.js"></script>
 </head>
 <body>
     <table>
@@ -78,7 +78,7 @@
                                     </td>
                                 </tr>
                             <tr>
-                                <td><input type="reset" name="reset" value="Cancel"></td>
+                                <td><input type="reset" id="reset" name="reset" value="Cancel"></td>
                                 <td><input type="submit" name="submit" value="Edit Entry"></td>
                                 <td></td>
                             </tr>
