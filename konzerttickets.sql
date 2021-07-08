@@ -13,9 +13,7 @@ CREATE TABLE users (
     lastname VARCHAR(50),
     firstname VARCHAR(50),
     email VARCHAR(100),
-    phone VARCHAR(25),
-    fk_reductionid INT NOT NULL,
-    FOREIGN KEY (fk_reductionid) REFERENCES reduction(reductionid)
+    phone VARCHAR(25)
 );
 
 CREATE TABLE concerts (
@@ -27,10 +25,13 @@ CREATE TABLE orders (
     orderid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     fk_userid INT NOT NULL,
     fk_concertid INT NOT NULL,
+    fk_reductionid INT NOT NULL,
+    orderdate DATE,
     paydate DATE,
     ispayed BOOLEAN,
     FOREIGN KEY (fk_userid) REFERENCES users(userid),
-    FOREIGN KEY (fk_concertid) REFERENCES concerts(concertid)
+    FOREIGN KEY (fk_concertid) REFERENCES concerts(concertid),
+    FOREIGN KEY (fk_reductionid) REFERENCES reduction(reductionid)
 );
 
 INSERT INTO reduction (reductionid, reduction, paytime) VALUES
