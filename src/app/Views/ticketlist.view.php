@@ -45,7 +45,7 @@
                                     <input type="email" id="email" name="email"><br>
                                     <input type="text" id="tel" name="tel">
                                     <label for="reduction">Reduction: </label><br>
-                                    <select class=selectreduciton id="reduction" name="reduction" style="width:100%">
+                                    <select class=selectreduction id="reduction" name="reduction" style="width:100%">
                                         <option value="">Select a Reduction....</option>
                                         <?php foreach ($reductions as $reduction) {
                                             echo '<option value="' . $reduction['reductionid'] . '">' . $reduction['reduction'] . '%</option>';
