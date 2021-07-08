@@ -3,6 +3,7 @@
 
 class TicketlistModel
 {
+    //Hauptrüchgabe für
     public function getTicketlist(){
         $pdo=db();
         $pre=$pdo->prepare('
@@ -18,7 +19,12 @@ class TicketlistModel
     //Funktion zum eintragen von Funkitonen in die Datenbank, sie wird nur aufgerufen, wenn die daten die Prüfung überstanden haben
     public function insertTicket($firstname, $lastname, $email, $phone, $reductionid, $concertid){
         $pdo=db();
-        $userid = $this->selectUser($firstname, $lastname, $email);
+        //Einbinden des UserModel.php Models
+        require 'UserModel.php';
+        $userModel = new UserModel();
+        $userid = $userModel->selectUser($firstname, $lastname, $email);
+
+        //Fals der User noch nicht exixstiert wird ein neuer angelegt
         if($userid === 0) {
             $userInsert = $pdo->prepare('INSERT INTO users(firstname, lastname, email, phone) VALUES ( :firstname, :lastname, :email, :phone)');
             $userInsert->bindParam(':firstname', $firstname);
@@ -29,7 +35,8 @@ class TicketlistModel
             $userid = $pdo->lastInsertId();
         }
 
-        $orderDate = date("Y-d-m");
+        $dateNow = new DateTime("Now");
+        $orderDate = $dateNow->format("Y-d-m");
         $payDate = $this->getPayDate($reductionid);
 
         $orderInsert=$pdo->prepare('INSERT INTO orders(fk_userid, fk_concertid, orderdate, paydate, fk_reductionid) VALUES (:userid, :concertid, :orderdate, :paydate, :reductionid)');
@@ -41,27 +48,20 @@ class TicketlistModel
         $orderInsert->execute();
     }
 
-    public function selectUser($firstname, $lastname, $email): int
-    {
-        $userQuery = db()->prepare('SELECT * FROM users WHERE users.firstname= :firstname AND users.lastname= :lastname AND users.email= :email;');
-        $userQuery->bindParam(':firstname', $firstname);
-        $userQuery->bindParam(':lastname', $lastname);
-        $userQuery->bindParam(':email', $email);
-        $userQuery->execute();
-        $result = $userQuery->fetch();
-
-        return $result['userid'] ?? 0;
-    }
-
-    //Gibt zurück, bis wann gezahlt werden muss
+    //Gibt zurück, bis wann gezahlt werden muss anhand der Auswahl des Bonuses
     public function getPayDate($reductionid){
         $reductionQuery = db()->prepare('SELECT paytime FROM reduction WHERE reductionid = :reductionid');
         $reductionQuery->bindParam(':reductionid', $reductionid);
         $reductionQuery->execute();
-        $returnid = $reductionQuery->fetch();
+        $result = $reductionQuery->fetch();
 
-        $addtime = ' +'.$returnid['paytime'].'days';
-        $paydate = Date("Y-d-m", strtotime($addtime));
-        return $paydate;
+        //Abspeichern der Zahlzeit (Tage) in Variable
+        echo $result['paytime'];
+        $addTime = $result['paytime'];
+
+        //erstellen DateTime objekt und hinzufügen der Tage
+        $paydate = new DateTime("Now");
+        $paydate->modify("+$addTime day");
+        return $paydate->format("Y-d-m");
     }
 }
