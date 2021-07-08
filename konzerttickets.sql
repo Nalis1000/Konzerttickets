@@ -27,7 +27,6 @@ CREATE TABLE orders (
     fk_concertid INT NOT NULL,
     fk_reductionid INT NOT NULL,
     orderdate DATE,
-    paydate DATE,
     ispayed BOOLEAN,
     FOREIGN KEY (fk_userid) REFERENCES users(userid),
     FOREIGN KEY (fk_concertid) REFERENCES concerts(concertid),

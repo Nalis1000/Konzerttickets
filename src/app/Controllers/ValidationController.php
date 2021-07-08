@@ -38,7 +38,7 @@ class ValidationController
             }
             if(strlen($lastname) < 1){
                 $errors['errorCount']++;
-                $errors['lastname'] = 'Firstname must consist of more than 0 characters';
+                $errors['lastname'] = 'Lastname must consist of more than 0 characters';
             }
             if(!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i", $email)){
                 $errors['errorCount']++;

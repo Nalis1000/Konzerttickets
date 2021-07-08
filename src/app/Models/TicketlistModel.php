@@ -8,9 +8,14 @@ class TicketlistModel
         $pdo=db();
         $pre=$pdo->prepare('
             SELECT u.userid, u.firstname, u.lastname, u.email, u.phone, r.reductionid, r.reduction,
-            r.paytime, o.orderid, o.ispayed, o.orderdate, o.paydate, c.artist FROM orders AS o JOIN concerts AS c ON o.fk_concertid = c.concertid 
+            r.paytime, o.orderid, o.ispayed, o.orderdate, DATE_ADD(o.orderdate, INTERVAL 
+                (SELECT w.paytime FROM reduction AS w WHERE w.reductionid = r.reductionid) DAY)
+                AS paydate, c.concertid, c.artist FROM orders AS o
+            JOIN concerts AS c ON o.fk_concertid = c.concertid
             JOIN users AS u ON o.fk_userid = u.userid
-            JOIN reduction AS r ON r.reductionid = o.fk_reductionid; '
+            JOIN reduction AS r ON r.reductionid = o.fk_reductionid 
+            WHERE o.ispayed IS NOT TRUE
+            ORDER BY paydate ASC;'
         );
         $pre->execute();
         return $pre->fetchAll();
@@ -37,31 +42,12 @@ class TicketlistModel
 
         $dateNow = new DateTime("Now");
         $orderDate = $dateNow->format("Y-d-m");
-        $payDate = $this->getPayDate($reductionid);
 
-        $orderInsert=$pdo->prepare('INSERT INTO orders(fk_userid, fk_concertid, orderdate, paydate, fk_reductionid) VALUES (:userid, :concertid, :orderdate, :paydate, :reductionid)');
+        $orderInsert=$pdo->prepare('INSERT INTO orders(fk_userid, fk_concertid, orderdate, fk_reductionid) VALUES (:userid, :concertid, :orderdate, :reductionid)');
         $orderInsert->bindParam(':userid', $userid);
         $orderInsert->bindParam(':concertid', $concertid);
         $orderInsert->bindParam(':orderdate', $orderDate);
         $orderInsert->bindParam(':reductionid', $reductionid);
-        $orderInsert->bindParam(':paydate', $payDate);
         $orderInsert->execute();
-    }
-
-    //Gibt zurück, bis wann gezahlt werden muss anhand der Auswahl des Bonuses
-    public function getPayDate($reductionid){
-        $reductionQuery = db()->prepare('SELECT paytime FROM reduction WHERE reductionid = :reductionid');
-        $reductionQuery->bindParam(':reductionid', $reductionid);
-        $reductionQuery->execute();
-        $result = $reductionQuery->fetch();
-
-        //Abspeichern der Zahlzeit (Tage) in Variable
-        echo $result['paytime'];
-        $addTime = $result['paytime'];
-
-        //erstellen DateTime objekt und hinzufügen der Tage
-        $paydate = new DateTime("Now");
-        $paydate->modify("+$addTime day");
-        return $paydate->format("Y-d-m");
     }
 }
