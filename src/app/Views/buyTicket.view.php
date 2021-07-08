@@ -23,11 +23,20 @@
         <fieldset id="concert_data">
             <label for="concert">Concert: </label><br>
             <select class=selectconcert id="concert" name="concert" style="width:100%">
-                <option value="">Select a state....</option>
+                <option value="">Select an Artist....</option>
                 <?php foreach ($concerts as $concert) {
-                    echo '<option value="' . $concert['artist'] . '">' . $concert['artist'] . '</option>';
+                    echo '<option value="' . $concert['concertid'] . '">' . $concert['artist'] . '</option>';
                 } ?>
-
+            </select>
+        </fieldset>
+        <label for="reduction_data">Concert Data: </label>
+        <fieldset id="reduction_data">
+            <label for="reduction">Concert: </label><br>
+            <select class=selectreduciton id="reduction" name="reduction" style="width:100%">
+                <option value="">Select a Reduction....</option>
+                <?php foreach ($reductions as $reduction) {
+                    echo '<option value="' . $reduction['reductionid'] . '">' . $reduction['reduction'] . '%</option>';
+                } ?>
             </select>
         </fieldset>
         <input type="reset" name="reset" value="Cancel">
