@@ -51,7 +51,7 @@
                                             echo '<option value="' . $reduction['reductionid'] . '"';
                                             if($ticket['reductionId']===$reduction['reductionid'])
                                                 echo 'selected';
-                                            echo'>' . $reduction['reduction'] '</option>';
+                                            echo'>' . $reduction['reductionId'] .'</option>';
                                         } ?>
                                     </select><br><br>
 
