@@ -5,7 +5,10 @@
     <title>New Buy Order</title>
     <!-- Set base for relative urls to the directory of index.php: -->
     <base href="<?= ROOT_URL ?>/">
+    <?php require 'app/Views/navbarHead.view.php'?>
+</head>
 <body>
+    <?php require 'app/Views/navbarBody.view.php'?>
     <form action="buyvalidation" id="loginForm" method="Post">
         <label for="personal_data">Personal Data:</label>
         <fieldset id="personal_data">

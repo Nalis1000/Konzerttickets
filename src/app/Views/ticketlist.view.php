@@ -8,7 +8,10 @@
 
     <link rel="stylesheet" href="public/css/collapsiblestylesheet.css">
      <script src="public/js/collapsible.js"></script>
+    <?php require 'app/Views/navbarHead.view.php'?>
+</head>
 <body>
+    <?php require 'app/Views/navbarBody.view.php'?>
     <table>
         <thead>
         <tr><th><input type="checkbox" id="paid" name="paid"value=""></th><th>Ticket</th><th>Action</th></tr>

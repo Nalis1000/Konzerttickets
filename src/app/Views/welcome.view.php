@@ -9,7 +9,10 @@
     <script src="public/js/bootstrap-js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="public/css/bootstrap-css/bootstrap.css">
     <!--<link rel="stylesheet" href="public/css/app.css">-->
+    <?php require 'app/Views/navbarHead.view.php'?>
+</head>
 <body>
+    <?php require 'app/Views/navbarBody.view.php'?>
     <div class="container">
     
         <h1 class="welcome">Willkommen im 307-Framework!</h1>
