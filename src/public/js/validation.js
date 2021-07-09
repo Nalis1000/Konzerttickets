@@ -11,8 +11,6 @@ function validation(sender) {
         if((firstname.value).length < 1) firstname.style.background = "#ff6600";
         if ((lastname.value).length < 1) lastname.style.background = "#ff6600";
         if ((email.value).length < 1) email.style.background = "#ff6600";
-        reduction.style.background = "#ff6600";
-        concert.style.background = "#ff6600";
     }
 
     //Fehler für vorname
@@ -36,7 +34,7 @@ function validation(sender) {
 
     //Fehler für email
     email.addEventListener("input", function (event) {
-        if (!/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test((email.value))) {
+        if ((lastname.value).length < 1) {
             email.setCustomValidity("email must be longer the 0 chars and contain '. @ .'");
             email.style.background = "#ff6600";
         } else {
@@ -46,7 +44,8 @@ function validation(sender) {
 
     //Fehler für reduction
     reduction.addEventListener("input", function (event) {
-        if ((reduction.value).length > 10) {
+        //Keine ahnung wieso das niecht bzw trotzdem Funktioniert
+        if ((reduction.value).length === 0) {
             reduction.style.background = "#ff6600";
         } else {
             reduction.style.background = "#ffffff";
@@ -55,7 +54,8 @@ function validation(sender) {
     
     //Fehler für concert
     concert.addEventListener("input", function (event) {
-        if ((concert.value).length !== 0) {
+        //Dasselbe wie oben
+        if ((concert.value).length === 0) {
             concert.style.background = "#ff6600";
         } else {
             concert.style.background = "#ffffff";
