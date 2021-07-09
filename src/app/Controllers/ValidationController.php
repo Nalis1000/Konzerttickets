@@ -8,7 +8,7 @@ class ValidationController
     var $concertModel = '';
     var $reducitonModel = '';
 
-    //Validierung von buyTicket.view eingabedaten (Serverside)
+    //Validierung von buyTicket.View eingabedaten (Serverside)
     function ticketBuyValidation(){
         //Validirung der Daten
         if($_SERVER['REQUEST_METHOD']==='POST') {
@@ -48,7 +48,7 @@ class ValidationController
         require 'app/Views/buyTicket.view.php';
     }
 
-    //Funktion die von ticketlist.view.php als validierung aufgerufen wird
+    //Funktion die von ticketlist.View.php als validierung aufgerufen wird
     function ticketEditValidation(){
         if($_SERVER['REQUEST_METHOD']==='POST') {
             $editdata = $this->getPostData();

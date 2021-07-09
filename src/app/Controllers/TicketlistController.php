@@ -23,7 +23,7 @@ class ticketlistController
     $tickets= $this->ticketlistModel->getTicketlist();
 
 
-        require 'app/views/ticketlist.view.php';
+        require 'app/Views/ticketlist.view.php';
     }
 
     function addpaid()

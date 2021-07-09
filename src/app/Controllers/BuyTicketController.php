@@ -21,6 +21,6 @@ class buyTicketController
         $reductions=$this->reducitonModel->getReduction();
 
         //Anzeigen des View
-        require "app/views/buyTicket.view.php";
+        require "../Views/buyTicket.view.php";
     }
 }
