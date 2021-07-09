@@ -19,5 +19,9 @@ function calcPayDate(e, label) {
     var date = new Date();
     date.setDate(date.getDate() + parseInt(days));
 
+    //Aus unerklärlichen gründen gibt date.getDate() das datum eines monates in der Vergangenheit
+    //Manuelle korrektur (unschön aber zeitbedingt)
+    date.setMonth(date.getMonth() + 1);
+
     payDateLabel.innerHTML = (date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
 }

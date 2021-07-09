@@ -5,9 +5,10 @@ class TicketlistModel
 {
     var $userModel = '';
 
-    //Hauptrüchgabe für
+    //Hauptrückgabe aller daten für die Ticketlist ausgabe
     public function getTicketlist(){
         $pdo=db();
+        //QUERY gibt alle wichtigen werte zurück inklusive des berechneten Zahldatums
         $pre=$pdo->prepare('
             SELECT u.userid, u.firstname, u.lastname, u.email, u.phone, r.reductionid, r.reduction,
             r.paytime, o.orderid, o.ispayed, o.orderdate, DATE_FORMAT(DATE_ADD(o.orderdate, INTERVAL 
@@ -26,7 +27,7 @@ class TicketlistModel
     //Funktion zum eintragen von Funkitonen in die Datenbank, sie wird nur aufgerufen, wenn die daten die Prüfung überstanden haben
     public function insertTicket($firstname, $lastname, $email, $phone, $reductionid, $concertid){
         $pdo=db();
-        //Einbinden des UserModel.php Models
+        //Einbinden des UserModel.php Models, von welcher wir die funkitonen gebrauchen
         require 'UserModel.php';
         if($this->userModel === '') {
             $this->userModel = new UserModel();
@@ -38,9 +39,11 @@ class TicketlistModel
             $userid = $this->userModel->insertUser($firstname, $lastname, $email, $phone);
         }
 
+        //Auslsen des Aktuellen datums (Heute)
         $dateNow = new DateTime("Now");
         $orderDate = $dateNow->format("Y-d-m");
 
+        //Einfügen der Daten in die Datenbank
         $orderInsert=$pdo->prepare('INSERT INTO orders(fk_userid, fk_concertid, orderdate, fk_reductionid, ispayed) VALUES (:userid, :concertid, :orderdate, :reductionid, 0)');
         $orderInsert->bindParam(':userid', $userid);
         $orderInsert->bindParam(':concertid', $concertid);
@@ -49,7 +52,9 @@ class TicketlistModel
         $orderInsert->execute();
     }
 
+    //Funktion zur bearbeitung der Tickets (orders)
     public function editTicket($firstname, $lastname, $email, $phone, $reductionid, $concertid, $orderid){
+        //Einbinden UserModel.php da funktionen davon benötigt werden
         require 'UserModel.php';
         $pdo = db();
         if($this->userModel === '') {
@@ -61,7 +66,9 @@ class TicketlistModel
             $userid = $this->userModel->insertUser($firstname, $lastname, $email, $phone);
         }
 
-        //Edit entry
+        //Edittieren der Einträge
+        //wird immer ausgeführt, auch wenn keinen änderungen vorgenommen werden
+        //Aufgrund der zeit konnten wir das nicht mehr anpassen
         $orderEdit = $pdo->prepare('UPDATE orders SET fk_userid = :userid, fk_reductionid = :reductionid, fk_concertid = :concertid WHERE orderid = :orderid');
         $orderEdit->bindParam(':userid' , $userid);
         $orderEdit->bindParam(':reductionid', $reductionid);
