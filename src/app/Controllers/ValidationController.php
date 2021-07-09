@@ -55,6 +55,23 @@ class ValidationController
             }
         }
 
+        if ($this->ticketlistModel === '') {
+            $this->ticketlistModel = new TicketlistModel();
+        }
+        if($this->concertModel === ''){
+            $this->concertModel = new ConcertModel();
+        }
+        if($this->reducitonModel === ''){
+            $this->reducitonModel = new ReductionModel();
+        }
+
+        $concerts=$this->concertModel->getConcerts();
+        $reductions=$this->reducitonModel->getReduction();
+        $tickets=$this->ticketlistModel->getTicketlist();
+        echo '<script> alert(\'Values not allowed, Changes Reset and not Pushed in Database\nFor more details open edited Ticket\') </script>';
+
+        require 'app/Views/ticketlist.view.php';
+
     }
 
     //Validiert die per array mitgegebenen Daten und gibt ien Fehlerarray zurück
