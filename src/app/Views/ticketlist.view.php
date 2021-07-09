@@ -35,7 +35,12 @@
             </td>
             <td>
                 <button type="button" class="collapsible">
-                    <?=$ticket['paydate']." Name: ".$ticket['lastname']." ".$ticket['firstname']."   "."Concert: ".$ticket['artist']?>
+                    <?php
+                        $date = new DateTime("Now");
+                        if($ticket['sortDate'] > $date->format("Y.m.d")) echo '⏳';
+                        elseif ($ticket['sortDate'] < $date->format("Y.m.d")) echo '⌛';
+                    ?>
+                    <?= $ticket['paydate']." Name: ".$ticket['lastname']." ".$ticket['firstname']."   "."Concert: ".$ticket['artist']?>
                 </button>
                 <div class="content">
                     <div class="container">

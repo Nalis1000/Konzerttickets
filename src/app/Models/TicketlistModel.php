@@ -13,12 +13,15 @@ class TicketlistModel
             SELECT u.userid, u.firstname, u.lastname, u.email, u.phone, r.reductionid, r.reduction,
             r.paytime, o.orderid, o.ispayed, o.orderdate, DATE_FORMAT(DATE_ADD(o.orderdate, INTERVAL 
                 (SELECT w.paytime FROM reduction AS w WHERE w.reductionid = r.reductionid) DAY), "%d.%m.%Y")
-                AS paydate, c.concertid, c.artist FROM orders AS o
+                                  AS paydate,
+                   DATE_FORMAT(DATE_ADD(o.orderdate, INTERVAL 
+                (SELECT w.paytime FROM reduction AS w WHERE w.reductionid = r.reductionid) DAY), "%Y.%m.%d") AS sortDate,
+                   c.concertid, c.artist FROM orders AS o
             JOIN concerts AS c ON o.fk_concertid = c.concertid
             JOIN users AS u ON o.fk_userid = u.userid
             JOIN reduction AS r ON r.reductionid = o.fk_reductionid 
             WHERE o.ispayed IS NOT TRUE
-            ORDER BY paydate ASC;'
+            ORDER BY sortDate ASC;'
         );
         $pre->execute();
         return $pre->fetchAll();
