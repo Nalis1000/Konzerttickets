@@ -9,7 +9,7 @@
     <!-- Einbinden der Scripts aus navbarHead -->
     <?php require 'app/Views/navbarHead.view.php'?>
 </head>
-<body>
+<body onload="validation('buyTicket')">
     <!-- Einbinden der Navbar -->
     <?php require 'app/Views/navbarBody.view.php'?>
 

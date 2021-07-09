@@ -132,16 +132,16 @@ class ValidationController
     // Holt einträge aus Post und speichert diese in einem Array
     public function getPostData() : array {
         $postData = [
-            'firstname' => trim($_POST['firstname']),
-            'lastname' => trim($_POST['lastname']),
-            'email' => trim($_POST['email']),
-            'phone' => trim($_POST['tel']),
-            'reductionid' => trim($_POST['reduction']),
-            'concertid' => trim($_POST['concert']),
+            'firstname' => strtolower(trim($_POST['firstname'])),
+            'lastname' => strtolower(trim($_POST['lastname'])),
+            'email' => strtolower(trim($_POST['email'])),
+            'phone' => strtolower(trim($_POST['tel'])),
+            'reductionid' => strtolower(trim($_POST['reduction'])),
+            'concertid' => strtolower(trim($_POST['concert'])),
             'orderid' => '',
         ];
         if(isset($_POST['orderid'])){
-            $postData['orderid'] = trim($_POST['orderid']);
+            $postData['orderid'] = strtolower(trim($_POST['orderid']));
         }
 
         return $postData;
