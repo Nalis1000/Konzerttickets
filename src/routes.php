@@ -5,4 +5,5 @@ $routes = [
     'ticketlist'=>'ticketlistController@index',
     'buyvalidation' => 'ValidationController@ticketBuyValidation',
     'editvalidation' => 'ValidationController@ticketEditValidation',
+    'addpaid'=>'TicketlistController@addpaid'
 ];

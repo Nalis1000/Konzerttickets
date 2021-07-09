@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Meine Seite</title>
+    <title>Welcome</title>
     <!-- Set base for relative urls to the directory of index.php: -->
     <base href="<?= ROOT_URL ?>/">
     <script src="public/js/jquery-3.6.0.min.js "></script>

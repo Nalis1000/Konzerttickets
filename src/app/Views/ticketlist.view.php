@@ -2,10 +2,10 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>New Buy Order</title>
+    <title>TicketList</title>
     <!-- Set base for relative urls to the directory of index.php: -->
     <base href="<?= ROOT_URL ?>/">
-
+    <script src="public/js/paid.js"></script>
     <link rel="stylesheet" href="public/css/collapsiblestylesheet.css">
      <script src="public/js/collapsible.js"></script>
     <?php require 'app/Views/navbarHead.view.php'?>
@@ -21,7 +21,12 @@
         foreach($tickets as $ticket): ?>
         <tr>
             <td>
-                <input type="checkbox" id="paid" name="paid"value="<?php $ticket['orderid']?>">
+
+                <form name="<?= $ticket['orderid']?>">
+                    <input type="hidden" name="orderid" value=<?= $ticket['orderid']?>>
+                    <input type="checkbox" name="ispayed" id="ispayed" value=<?= $ticket['ispayed']?> onclick="pay(this.form)">
+                </form>
+
             </td>
             <td>
                 <button type="button" class="collapsible">

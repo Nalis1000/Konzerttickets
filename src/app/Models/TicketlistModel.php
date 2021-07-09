@@ -41,7 +41,7 @@ class TicketlistModel
         $dateNow = new DateTime("Now");
         $orderDate = $dateNow->format("Y-d-m");
 
-        $orderInsert=$pdo->prepare('INSERT INTO orders(fk_userid, fk_concertid, orderdate, fk_reductionid) VALUES (:userid, :concertid, :orderdate, :reductionid)');
+        $orderInsert=$pdo->prepare('INSERT INTO orders(fk_userid, fk_concertid, orderdate, fk_reductionid, ispayed) VALUES (:userid, :concertid, :orderdate, :reductionid,0)');
         $orderInsert->bindParam(':userid', $userid);
         $orderInsert->bindParam(':concertid', $concertid);
         $orderInsert->bindParam(':orderdate', $orderDate);
@@ -62,12 +62,20 @@ class TicketlistModel
         }
 
         //Edit entry
-        $orderEdit = $pdo->prepare('UPDATE orders SET fk_userid = :userid, fk_reductionid = :reductionid, fk_concertid = :concertid, ispayed = 0 WHERE orderid = :orderid');
+        $orderEdit = $pdo->prepare('UPDATE orders SET fk_userid = :userid, fk_reductionid = :reductionid, fk_concertid = :concertid WHERE orderid = :orderid');
         $orderEdit->bindParam(':userid' , $userid);
         $orderEdit->bindParam(':reductionid', $reductionid);
         $orderEdit->bindParam(':concertid', $concertid);
         $orderEdit->bindParam(':orderid', $orderid);
         $orderEdit->execute();
 
+    }
+    public function updatepaid($ispayed,$orderid){
+        $pdo=db();
+        $paidupdate=$pdo->prepare('UPDATE orders SET ispayed=:ispayed WHERE orderid=:orderid');
+        $paidupdate->bindParam(':ispayed',$ispayed);
+        $paidupdate->bindParam(':orderid',$orderid);
+        $paidupdate->execute();
+        echo $ispayed;
     }
 }
