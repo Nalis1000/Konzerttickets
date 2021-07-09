@@ -6,10 +6,11 @@ class ticketlistController
     var $concertModel = '';
     var $reducitonModel = '';
     var $ticketlistModel= '';
-function index(){
-    require "app/Models/TicketlistModel.php";
-    require 'app/Models/ConcertModel.php';
-    require 'app/Models/ReductionModel.php';
+
+    function index(){
+    //require "app/Models/TicketlistModel.php";
+    //require 'app/Models/ConcertModel.php';
+    //require 'app/Models/ReductionModel.php';
     if($this->ticketlistModel === ''){
         $this->ticketlistModel = new TicketlistModel();
     }

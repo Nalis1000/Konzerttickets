@@ -8,11 +8,11 @@ class ValidationController
     var $reducitonModel = '';
 
     function ticketBuyValidation(){
-        require 'app/Models/ConcertModel.php';
-        require 'app/Models/ReductionModel.php';
+        //require 'app/Models/ConcertModel.php';
+        //require 'app/Models/ReductionModel.php';
 
         if($_SERVER['REQUEST_METHOD']==='POST') {
-            require 'app/Models/TicketlistModel.php';
+            //require 'app/Models/TicketlistModel.php';
 
 
             $errors = [

@@ -9,7 +9,6 @@
     <script src="public/js/bootstrap-js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="public/css/bootstrap-css/bootstrap.css">
     <!--<link rel="stylesheet" href="public/css/app.css">-->
-</head>
 <body>
     <div class="container">
     

@@ -8,7 +8,6 @@
 
     <link rel="stylesheet" href="public/css/collapsiblestylesheet.css">
      <script src="public/js/collapsible.js"></script>
-</head>
 <body>
     <table>
         <thead>

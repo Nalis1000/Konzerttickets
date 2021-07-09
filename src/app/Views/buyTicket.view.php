@@ -5,7 +5,6 @@
     <title>New Buy Order</title>
     <!-- Set base for relative urls to the directory of index.php: -->
     <base href="<?= ROOT_URL ?>/">
-</head>
 <body>
     <form action="buyvalidation" id="loginForm" method="Post">
         <label for="personal_data">Personal Data:</label>
