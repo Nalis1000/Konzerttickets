@@ -10,8 +10,4 @@ class ConcertModel
         $pre->execute();
         return $pre->fetchAll();
     }
-
-    public function addConcerts(){
-
-    }
 }

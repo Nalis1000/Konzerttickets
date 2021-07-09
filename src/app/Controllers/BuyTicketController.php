@@ -7,8 +7,6 @@ class buyTicketController
     var $reducitonModel = '';
 
     function index(){
-        //require 'app/Models/ConcertModel.php';
-        //require 'app/Models/ReductionModel.php';
 
         //Erstellen neue ConcertModel und ReductionModel objekte falls noch keine vorhanden
         if($this->concertModel === ''){
@@ -18,9 +16,11 @@ class buyTicketController
             $this->reducitonModel = new ReductionModel();
         }
 
+        //Aufrufen der getConcerts und getReduction methoden, welche beide daten zurückgeben
         $concerts=$this->concertModel->getConcerts();
         $reductions=$this->reducitonModel->getReduction();
 
+        //Anzeigen des View
         require "app/views/buyTicket.view.php";
     }
 }

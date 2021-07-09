@@ -4,9 +4,9 @@
 class UserModel
 {
     //Funktion schaut, ob es schon einen Benutzer mit demselben namen und Email gibt, wenn ja gibt er ihn zurück
-    public function selectUser($firstname, $lastname, $email): int
-    {
-        $userQuery = db()->prepare('SELECT * FROM users WHERE users.firstname= :firstname AND users.lastname= :lastname AND users.email= :email;');
+    public function selectUser($firstname, $lastname, $email): int {
+        $pdo = db();
+        $userQuery = $pdo->prepare('SELECT * FROM users WHERE users.firstname= :firstname AND users.lastname= :lastname AND users.email= :email;');
         $userQuery->bindParam(':firstname', $firstname);
         $userQuery->bindParam(':lastname', $lastname);
         $userQuery->bindParam(':email', $email);
@@ -16,6 +16,7 @@ class UserModel
         return $result['userid'] ?? 0;
     }
 
+    //Erstelt einen Benutzereintrag mit den mitgegebenen daten
     public function insertUser($firstname, $lastname, $email, $phone) : int {
         $pdo = db();
         $userInsert = $pdo->prepare('INSERT INTO users(firstname, lastname, email, phone) VALUES ( :firstname, :lastname, :email, :phone)');

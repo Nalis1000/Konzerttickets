@@ -3,8 +3,6 @@
 function calcPayDate(e, label) {
     var payDateLabel = document.querySelector('#'+label);
 
-    alert(label);
-
     //Tage von Targetvalue Auslesen
     var days = 0;
     if(e.value == 1){
@@ -20,6 +18,10 @@ function calcPayDate(e, label) {
     //Berechnen des Zahltages
     var date = new Date();
     date.setDate(date.getDate() + parseInt(days));
+
+    //Aus unerklärlichen gründen gibt date.getDate() das datum eines monates in der Vergangenheit
+    //Manuelle korrektur (unschön aber zeitbedingt)
+    date.setMonth(date.getMonth() + 1);
 
     payDateLabel.innerHTML = (date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
 }
