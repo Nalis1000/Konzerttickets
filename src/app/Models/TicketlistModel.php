@@ -62,7 +62,7 @@ class TicketlistModel
         }
 
         //Edit entry
-        $orderEdit = $pdo->prepare('UPDATE orders SET fk_userid = :userid, fk_reductionid = :reductionid, fk_concertid = :concertid WHERE orderid = :orderid');
+        $orderEdit = $pdo->prepare('UPDATE orders SET fk_userid = :userid, fk_reductionid = :reductionid, fk_concertid = :concertid, ispayed = 0 WHERE orderid = :orderid');
         $orderEdit->bindParam(':userid' , $userid);
         $orderEdit->bindParam(':reductionid', $reductionid);
         $orderEdit->bindParam(':concertid', $concertid);

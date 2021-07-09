@@ -106,8 +106,12 @@ class ValidationController
             'phone' => trim($_POST['tel']),
             'reductionid' => trim($_POST['reduction']),
             'concertid' => trim($_POST['concert']),
-            'orderid' => trim($_POST['orderid']),
+            'orderid' => '',
         ];
+        if(isset($_POST['orderid'])){
+            $postData['orderid'] = trim($_POST['orderid']);
+        }
+
         return $postData;
     }
 }

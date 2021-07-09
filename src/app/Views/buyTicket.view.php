@@ -10,7 +10,7 @@
 <body>
     <?php require 'app/Views/navbarBody.view.php'?>
     <form action="buyvalidation" id="loginForm" method="Post">
-        <label for="personal_data">Personal Data:</label>
+        <label for="personal_data">Insert Date</label>
         <fieldset id="personal_data">
             <table>
                 <tablebody>
@@ -37,7 +37,7 @@
                     <tr>
                         <td><label for="reduction">Reduction: </label></td>
                         <td>
-                            <select class=selectreduciton id="reduction" name="reduction" style="width:100%">
+                            <select class=selectreduciton id="reduction" name="reduction" style="width:100%" onchange="calcPayDate(this, 'payDateLabel')">
                                 <option value="">Select a Reduction....</option>
                                 <?php foreach ($reductions as $reduction) {
                                     echo '<option value="' . $reduction['reductionid'] . '"';
@@ -50,13 +50,11 @@
                         </td>
                         <td><?php if(isset($errors['reduction'])) echo $errors['reduction'] ?></td>
                     </tr>
-                </tablebody>
-            </table>
-        </fieldset>
-        <label for="concert_data">Concert Data: </label>
-        <fieldset id="concert_data">
-            <table>
-                <tablebody>
+                    <tr>
+                        <td><label for="payDateLabel">To pay until:</label></td>
+                        <td><label id="payDateLabel" class="payDateLabel"></label></td>
+                        <td></td>
+                    </tr>
                     <tr>
                         <td><label for="concert">Concert: </label></td>
                         <td>
