@@ -3,6 +3,8 @@
 
 class TicketlistModel
 {
+    var $userModel = '';
+
     //Hauptrüchgabe für
     public function getTicketlist(){
         $pdo=db();
@@ -26,18 +28,14 @@ class TicketlistModel
         $pdo=db();
         //Einbinden des UserModel.php Models
         require 'UserModel.php';
-        $userModel = new UserModel();
-        $userid = $userModel->selectUser($firstname, $lastname, $email);
+        if($this->userModel === '') {
+            $this->userModel = new UserModel();
+        }
+        $userid = $this->userModel->selectUser($firstname, $lastname, $email);
 
         //Fals der User noch nicht exixstiert wird ein neuer angelegt
         if($userid === 0) {
-            $userInsert = $pdo->prepare('INSERT INTO users(firstname, lastname, email, phone) VALUES ( :firstname, :lastname, :email, :phone)');
-            $userInsert->bindParam(':firstname', $firstname);
-            $userInsert->bindParam(':lastname', $lastname);
-            $userInsert->bindParam(':email', $email);
-            $userInsert->bindParam(':phone', $phone);
-            $userInsert->execute();
-            $userid = $pdo->lastInsertId();
+            $userid = $this->userModel->insertUser($firstname, $lastname, $email, $phone);
         }
 
         $dateNow = new DateTime("Now");
@@ -49,5 +47,27 @@ class TicketlistModel
         $orderInsert->bindParam(':orderdate', $orderDate);
         $orderInsert->bindParam(':reductionid', $reductionid);
         $orderInsert->execute();
+    }
+
+    public function editTicket($firstname, $lastname, $email, $phone, $reductionid, $concertid, $orderid){
+        require 'UserModel.php';
+        $pdo = db();
+        if($this->userModel === '') {
+            $this->userModel = new UserModel();
+        }
+        $userid = $this->userModel->selectUser($firstname, $lastname, $email);
+
+        if($userid === 0){
+            $userid = $this->userModel->insertUser($firstname, $lastname, $email, $phone);
+        }
+
+        //Edit entry
+        $orderEdit = $pdo->prepare('UPDATE orders SET fk_userid = :userid, fk_reductionid = :reductionid, fk_concertid = :concertid WHERE orderid = :orderid');
+        $orderEdit->bindParam(':userid' , $userid);
+        $orderEdit->bindParam(':reductionid', $reductionid);
+        $orderEdit->bindParam(':concertid', $concertid);
+        $orderEdit->bindParam(':orderid', $orderid);
+        $orderEdit->execute();
+
     }
 }

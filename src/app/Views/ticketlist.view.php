@@ -29,9 +29,10 @@
                 </button>
                 <div class="content">
                     <div class="container">
-                        <form id="editTicket" name="editTicket" action="ticketlist" method="post">
+                        <form id="editTicket" name="editTicket" action="editvalidation" method="post">
                         <table>
                             <tbody>
+                            <input type="hidden" name="orderid" id="orderid" value="<?= $ticket['orderid']?>">
                                 <tr>
                                     <td><label for="firstname">Firstname: </label></td>
                                     <td><input type="text" id="firstname" name="firstname" value="<?= $ticket['firstname']?>"></td>

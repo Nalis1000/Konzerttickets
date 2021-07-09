@@ -15,4 +15,15 @@ class UserModel
 
         return $result['userid'] ?? 0;
     }
+
+    public function insertUser($firstname, $lastname, $email, $phone) : int {
+        $pdo = db();
+        $userInsert = $pdo->prepare('INSERT INTO users(firstname, lastname, email, phone) VALUES ( :firstname, :lastname, :email, :phone)');
+        $userInsert->bindParam(':firstname', $firstname);
+        $userInsert->bindParam(':lastname', $lastname);
+        $userInsert->bindParam(':email', $email);
+        $userInsert->bindParam(':phone', $phone);
+        $userInsert->execute();
+        return $pdo->lastInsertId();
+    }
 }

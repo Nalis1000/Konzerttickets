@@ -16,22 +16,22 @@
                 <tablebody>
                     <tr>
                         <td><label for="firstname">Firstname: </label></td>
-                        <td><input type="text" id="firstname" name="firstname" value="<?php if(isset($firstname)) echo $firstname; ?>"></td>
+                        <td><input type="text" id="firstname" name="firstname" value="<?php if(isset($ticketdata['firstname'])) echo$ticketdata['firstname']; ?>"></td>
                         <td><?php if(isset($errors['firstname'])) echo $errors['firstname'] ?></td>
                     </tr>
                     <tr>
                         <td><label for="lastname">Lastname: </label></td>
-                        <td><input type="text" id="lastname" name="lastname" value="<?php if(isset($lastname)) echo $lastname; ?>">
+                        <td><input type="text" id="lastname" name="lastname" value="<?php if(isset($ticketdata['lastname'])) echo $ticketdata['lastname']; ?>">
                         <td><?php if(isset($errors['lastname'])) echo $errors['lastname'] ?></td>
                     </tr>
                     <tr>
                         <td><label for="email">EMail: </label></td>
-                        <td><input type="email" id="email" name="email" value="<?php if(isset($email)) echo $email; ?>"></td>
+                        <td><input type="email" id="email" name="email" value="<?php if(isset($ticketdata['email'])) echo $ticketdata['email']; ?>"></td>
                         <td><?php if(isset($errors['email'])) echo $errors['email'] ?></td>
                     </tr>
                     <tr>
                         <td><label for="tel">phone number: </label></td>
-                        <td><input type="text" id="tel" name="tel" value="<?php if(isset($phone)) echo $phone; ?>"></td>
+                        <td><input type="text" id="tel" name="tel" value="<?php if(isset($ticketdata['phone'])) echo $ticketdata['phone']; ?>"></td>
                         <td><?php if(isset($errors['phone'])) echo $errors['phone'] ?></td>
                     </tr>
                     <tr>
@@ -41,8 +41,8 @@
                                 <option value="">Select a Reduction....</option>
                                 <?php foreach ($reductions as $reduction) {
                                     echo '<option value="' . $reduction['reductionid'] . '"';
-                                    if(isset($reductionid)){
-                                        if($reductionid === $reduction['reductionid']) echo 'selected';
+                                    if(isset($ticketdata['reductionid'])){
+                                        if($ticketdata['reductionid'] === $reduction['reductionid']) echo 'selected';
                                     }
                                     echo '>' . $reduction['reduction'] . '%</option>';
                                 } ?>
@@ -64,8 +64,8 @@
                                 <option value="">Select an Artist....</option>
                                 <?php foreach ($concerts as $concert) {
                                     echo '<option value="' . $concert['concertid'] . '"';
-                                    if(isset($concertid)){
-                                        if($concertid === $concert['concertid']) echo 'selected';
+                                    if(isset($ticketdata['concertid'])){
+                                        if($ticketdata['concertid'] === $concert['concertid']) echo 'selected';
                                     }
                                     echo '>' . $concert['artist'] . '</option>';
                                 } ?>
