@@ -3,8 +3,6 @@
 function calcPayDate(e, label) {
     var payDateLabel = document.querySelector('#'+label);
 
-    alert(label);
-
     //Tage von Targetvalue Auslesen
     var days = 0;
     if(e.value == 1){
